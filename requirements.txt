@@ -1,0 +1,6 @@
+# برنامه مدیریت وظایف - Task Management Program
+# این برنامه از کتابخانه‌های استاندارد Python استفاده می‌کند
+# No external dependencies required - uses Python standard library only
+
+# Python version requirement
+python>=3.6
