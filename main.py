@@ -5,6 +5,9 @@ Task Management Program
 برنامه مدیریت وظایف
 """
 
+from datetime import datetime
+
+
 class TaskManager:
     """Main task manager class"""
     
@@ -13,11 +16,30 @@ class TaskManager:
     
     def add_task(self, description):
         """Add a new task"""
-        pass
+        task = {
+            'id': len(self.tasks) + 1,
+            'description': description,
+            'completed': False,
+            'created_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
+        self.tasks.append(task)
+        print(f"✓ Task added: {description}")
     
     def display_tasks(self):
         """Display all tasks"""
-        pass
+        if not self.tasks:
+            print("No tasks available")
+            return
+
+        print("\n" + "="*60)
+        print("Task List:")
+        print("="*60)
+        
+        for task in self.tasks:
+            status = "✓" if task['completed'] else "○"
+            print(f"{status} [{task['id']}] {task['description']}")
+            print(f"    Created: {task['created_at']}")
+            print("-"*60)
     
     def delete_task(self, task_id):
         """Delete a task"""
