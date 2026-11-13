@@ -43,11 +43,36 @@ class TaskManager:
     
     def delete_task(self, task_id):
         """Delete a task"""
-        pass
+        task = next((t for t in self.tasks if t['id'] == task_id), None)
+        if task:
+            self.tasks.remove(task)
+            # Reindex tasks
+            for i, t in enumerate(self.tasks):
+                t['id'] = i + 1
+            print(f"✓ Task with ID {task_id} deleted")
+        else:
+            print(f"✗ Task with ID {task_id} not found")
     
     def mark_completed(self, task_id):
         """Mark task as completed"""
-        pass
+        task = next((t for t in self.tasks if t['id'] == task_id), None)
+        if task:
+            task['completed'] = True
+            task['completed_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            print(f"✓ Task with ID {task_id} marked as completed")
+        else:
+            print(f"✗ Task with ID {task_id} not found")
+    
+    def mark_incomplete(self, task_id):
+        """Mark task as incomplete"""
+        task = next((t for t in self.tasks if t['id'] == task_id), None)
+        if task:
+            task['completed'] = False
+            if 'completed_at' in task:
+                del task['completed_at']
+            print(f"✓ Task with ID {task_id} marked as incomplete")
+        else:
+            print(f"✗ Task with ID {task_id} not found")
 
 
 def main():
